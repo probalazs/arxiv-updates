@@ -14,12 +14,15 @@ google-auth = "*"
 black = "*"
 mypy = "*"
 flake8 = "*"
+pytest = "*"
+pytest-timeout = "*"
 
 [requires]
 python_version = "3.11"
 python_full_version = "3.11.4"
 
 [scripts]
+test = "pytest -p no:cacheprovider"
 format = "black ."
 lint = "flake8 ."
 typecheck = "mypy ."
