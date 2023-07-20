@@ -1,0 +1,8 @@
+version: '3'
+services:
+  terraform:
+    image: hashicorp/terraform:latest
+    working_dir: /usr/src/app
+    volumes:
+      - ./infrastructure:/usr/src/app/
+      - ~/.config/gcloud:/root/.config/gcloud:ro
