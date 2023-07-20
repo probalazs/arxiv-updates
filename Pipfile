@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+feedparser = "*"
+google-cloud-storage = "*"
+google-cloud-pubsub = "*"
+google-auth = "*"
+
+[dev-packages]
+black = "*"
+mypy = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.4"
+
+[scripts]
+format = "black ."
+lint = "flake8 ."
+typecheck = "mypy ."
+all = "black . && flake8 . && mypy ."
+run = "python -m src.main"
+terraform-init = "docker-compose run --rm terraform init"
+terraform-apply = "docker-compose run --rm terraform apply"
+terraform-format = "docker-compose run --rm terraform fmt -recursive"
