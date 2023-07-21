@@ -24,8 +24,8 @@ class TestXML:
 
 
 def get_xml(override=None) -> TestXML:
-    feed = override.get("feed", {"updated": datetime.now().isoformat()})
-    entries = override.get("entries", [])
+    feed = (override or {}).get("feed", {"updated": datetime.now().isoformat()})
+    entries = (override or {}).get("entries", [])
     return TestXML(
         feed=TestXMLFeed(**feed), entries=[TestXMLEntry(**entry) for entry in entries]
     )
