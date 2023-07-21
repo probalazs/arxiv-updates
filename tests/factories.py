@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from src.interface import XML
+from tests.helpers import get_random_string
 
 
 @dataclass
@@ -28,3 +29,12 @@ def get_xml(override=None) -> TestXML:
     return TestXML(
         feed=TestXMLFeed(**feed), entries=[TestXMLEntry(**entry) for entry in entries]
     )
+
+
+@dataclass
+class TestBlob:
+    name: str
+
+
+def get_blob(override=None) -> TestBlob:
+    return TestBlob(**{"name": get_random_string(), **(override or {})})
