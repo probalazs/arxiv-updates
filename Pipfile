@@ -16,6 +16,7 @@ mypy = "*"
 flake8 = "*"
 pytest = "*"
 pytest-timeout = "*"
+pytest-httpserver = "*"
 
 [requires]
 python_version = "3.11"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+ xmlns:admin="http://webns.net/mvcb/"
+>
+
+<channel rdf:about="http://arxiv.org/">
+<title>cs.AI updates on arXiv.org</title>
+<link>http://arxiv.org/</link>
+<description rdf:parseType="Literal">Computer Science -- Artificial Intelligence (cs.AI) updates on the arXiv.org e-print archive</description>
+<dc:language>en-us</dc:language>
+<dc:date>2023-07-20T20:30:00-05:00</dc:date>
+<dc:publisher>help@arxiv.org</dc:publisher>
+<dc:subject>Computer Science -- Artificial Intelligence</dc:subject>
+<syn:updateBase>1901-01-01T00:00+00:00</syn:updateBase>
+<syn:updateFrequency>1</syn:updateFrequency>
+<syn:updatePeriod>daily</syn:updatePeriod>
+<items>
+ <rdf:Seq>
+  <rdf:li rdf:resource="http://arxiv.org/abs/2307.10182" />
+  </rdf:Seq>
+</items>
+<image rdf:resource="http://arxiv.org/icons/sfx.gif" />
+</channel>
+<image rdf:about="http://arxiv.org/icons/sfx.gif">
+<title>arXiv.org</title>
+<url>http://arxiv.org/icons/sfx.gif</url>
+<link>http://arxiv.org/</link>
+</image>
+<item rdf:about="http://arxiv.org/abs/2307.10182">
+<title>Enhancing Super-Resolution Networks through Realistic Thick-Slice CT Simulation. (arXiv:2307.10182v1 [eess.IV])</title>
+<link>http://arxiv.org/abs/2307.10182</link>
+<description rdf:parseType="Literal">&lt;p&gt;This study aims to develop and evaluate an innovative simulation algorithm
+for generating thick-slice CT images that closely resemble actual images in the
+AAPM-Mayo&apos;s 2016 Low Dose CT Grand Challenge dataset. The proposed method was
+evaluated using Peak Signal-to-Noise Ratio (PSNR) and Root Mean Square Error
+(RMSE) metrics, with the hypothesis that our simulation would produce images
+more congruent with their real counterparts. Our proposed method demonstrated
+substantial enhancements in terms of both PSNR and RMSE over other simulation
+methods. The highest PSNR values were obtained with the proposed method,
+yielding 49.7369 $\pm$ 2.5223 and 48.5801 $\pm$ 7.3271 for D45 and B30
+reconstruction kernels, respectively. The proposed method also registered the
+lowest RMSE with values of 0.0068 $\pm$ 0.0020 and 0.0108 $\pm$ 0.0099 for D45
+and B30, respectively, indicating a distribution more closely aligned with the
+authentic thick-slice image. Further validation of the proposed simulation
+algorithm was conducted using the TCIA LDCT-and-Projection-data dataset. The
+generated images were then leveraged to train four distinct super-resolution
+(SR) models, which were subsequently evaluated using the real thick-slice
+images from the 2016 Low Dose CT Grand Challenge dataset. When trained with
+data produced by our novel algorithm, all four SR models exhibited enhanced
+performance.
+&lt;/p&gt;
+</description>
+<dc:creator> &lt;a href=&quot;http://arxiv.org/find/eess/1/au:+Tang_Z/0/1/0/all/0/1&quot;&gt;Zeyu Tang&lt;/a&gt;, &lt;a href=&quot;http://arxiv.org/find/eess/1/au:+Xing_X/0/1/0/all/0/1&quot;&gt;Xiaodan Xing&lt;/a&gt;, &lt;a href=&quot;http://arxiv.org/find/eess/1/au:+Yang_G/0/1/0/all/0/1&quot;&gt;Guang Yang&lt;/a&gt;</dc:creator>
+</item>
+</rdf:RDF>
