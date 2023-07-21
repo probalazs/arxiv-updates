@@ -9,6 +9,7 @@ feedparser = "*"
 google-cloud-storage = "*"
 google-cloud-pubsub = "*"
 google-auth = "*"
+ramda = "*"
 
 [dev-packages]
 black = "*"
