@@ -58,27 +58,6 @@ resource "google_storage_bucket_iam_binding" "object_viewer" {
   ]
 }
 
-resource "google_service_account" "test" {
-  account_id = "test-application"
-}
-
-resource "google_storage_bucket" "test" {
-  name          = "arxiv-updates-test"
-  location      = "europe-west3"
-  force_destroy = true
-
-  uniform_bucket_level_access = true
-
-  lifecycle_rule {
-    condition {
-      age = 1
-    }
-    action {
-      type = "Delete"
-    }
-  }
-}
-
 resource "google_storage_bucket_iam_binding" "object_admin" {
   depends_on = [google_service_account.test, google_storage_bucket.test]
   bucket     = google_storage_bucket.test.name
