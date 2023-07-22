@@ -2,7 +2,7 @@ from os import environ
 
 
 def project_id() -> str:
-    return environ["PROJECT_ID"]
+    return environ["GCP_PROJECT"]
 
 
 def application_service_account() -> str | None:
