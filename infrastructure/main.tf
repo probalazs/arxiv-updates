@@ -19,6 +19,10 @@ provider "google" {
   region                      = "europe-west3"
 }
 
+resource "google_service_account" "application" {
+  account_id = "arxiv-updates-application"
+}
+
 resource "google_storage_bucket" "releases" {
   name          = "arxiv-updates-releases"
   location      = "europe-west3"

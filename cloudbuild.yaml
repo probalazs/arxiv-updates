@@ -25,3 +25,4 @@ steps:
       - --entry-point=main
       - --runtime=python311
       - --allow-unauthenticated
+      - --run-service-account=arxiv-updates-application@clean-fin-392913.iam.gserviceaccount.com
