@@ -1,13 +1,13 @@
 steps:
   - name: "hashicorp/terraform:latest"
-    entrypoint: sh
+    entrypoint: bash
     args:
       - "-c"
       - |
         terraform -chdir=infrastructure init
         terraform -chdir=infrastructure apply -auto-approve
   - name: "python:3.11"
-    entrypoint: sh
+    entrypoint: bash
     args:
       - "-c"
       - |
@@ -15,7 +15,7 @@ steps:
         pipenv sync
         pipenv requirements
   - name: "python:3.11"
-    entrypoint: sh
+    entrypoint: bash
     args:
       - "-c"
       - |
