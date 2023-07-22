@@ -18,6 +18,8 @@ flake8 = "*"
 pytest = "*"
 pytest-timeout = "*"
 pytest-httpserver = "*"
+functions-framework = "*"
+gcp-storage-emulator = "*"
 
 [requires]
 python_version = "3.11"
