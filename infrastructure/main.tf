@@ -58,15 +58,6 @@ resource "google_storage_bucket_iam_binding" "object_viewer" {
   ]
 }
 
-resource "google_storage_bucket_iam_binding" "object_admin" {
-  depends_on = [google_service_account.test, google_storage_bucket.test]
-  bucket     = google_storage_bucket.test.name
-  role       = "roles/storage.objectAdmin"
-  members = [
-    google_service_account.test.member
-  ]
-}
-
 resource "google_storage_bucket" "static-site" {
   name          = "arxiv-updates-static-site"
   location      = "europe-west3"
