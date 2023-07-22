@@ -36,7 +36,7 @@ resource "google_storage_bucket_iam_binding" "releases_object_viewer" {
   bucket     = google_storage_bucket.releases.name
   role       = "roles/storage.objectViewer"
   members = [
-    "allUsers"
+    "user:allUsers"
   ]
 }
 
@@ -76,10 +76,30 @@ resource "google_storage_bucket_iam_binding" "static_site_object_viewer" {
   bucket     = google_storage_bucket.static-site.name
   role       = "roles/storage.objectViewer"
   members = [
-    "allUsers"
+    "user:allUsers"
   ]
 }
 
 resource "google_service_account" "test" {
   account_id = "arxiv-updates-test"
+}
+
+data "google_cloudfunctions_function" "arxiv_updates" {
+  name = "arxiv-updates"
+}
+
+resource "google_cloud_scheduler_job" "check_for_updates" {
+  name      = "check-for-updates"
+  schedule  = "30 4 * * *"
+  time_zone = "Europe/Budapest"
+
+  retry_config {
+    retry_count = 1
+  }
+
+  http_target {
+    http_method = "POST"
+    uri         = data.google_cloudfunctions_function.arxiv_updates.https_trigger_url
+    body        = "{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}"
+  }
 }
