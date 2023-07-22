@@ -7,11 +7,3 @@ def project_id() -> str:
 
 def application_service_account() -> str | None:
     return environ.get("APPLICATION_SERVICE_ACCOUNT")
-
-
-def rss() -> str:
-    return environ["RSS"]
-
-
-def updates_releases_bucket() -> str:
-    return environ["UPDATES_RELEASE_BUCKET"]

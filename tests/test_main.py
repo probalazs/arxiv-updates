@@ -19,11 +19,12 @@ CLOUD_FUNCTION_PORT = 8090
 def test__main__uploads_the_release(storage, cloud_function, httpserver: HTTPServer):
     xml = get_fixture_xml()
     httpserver.expect_request("/").respond_with_data(xml)
-    worker_data = cloud_function(
-        httpserver.url_for("/"), storage["emaulator_host"], storage["bucket"]
-    )
+    worker_data = cloud_function(storage["emaulator_host"])
 
-    requests.post(worker_data["cloud_function_url"])
+    requests.post(
+        worker_data["cloud_function_url"],
+        json={"rss": httpserver.url_for("/"), "bucket": storage["bucket"]},
+    )
 
     with patch.dict(os.environ, {"STORAGE_EMULATOR_HOST": storage["emaulator_host"]}):
         assert get_blob_names(storage["bucket"]) == [
@@ -53,12 +54,10 @@ def storage():
 def cloud_function():
     worker_process = {}
 
-    def run(rss: str, storage_emulator_host: str, updates_release_bucket: str):
+    def run(storage_emulator_host: str):
         worker_process["process"] = start_worker(
             {
-                "RSS": rss,
                 "STORAGE_EMULATOR_HOST": storage_emulator_host,
-                "UPDATES_RELEASE_BUCKET": updates_release_bucket,
             },
             CLOUD_FUNCTION_PORT,
         )

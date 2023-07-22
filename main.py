@@ -9,18 +9,18 @@ from src.updater.libs.get_latest_update_time import get_lates_update_time
 from src.updater.libs.get_paper_updates import get_paper_updates_xml
 from src.updater.libs.upload_release_to_storage import upload_release_to_storage
 from src.updater.libs.get_release import get_release
-from src.configuration import rss, updates_releases_bucket
 import functions_framework
 import google.cloud.logging
 
 
 @functions_framework.http
-def main(_: Any) -> None:
+def main(request: Any) -> None:
+    body = request.get_json(silent=True)
     _setup_logging()
-    _run_updaload()
+    _run_updaload(body["rss"], body["bucket"])
 
 
-def _run_updaload() -> None:
+def _run_updaload(rss: str, bucket: str) -> None:
     UploadNewRelease(
         client=storage_client(),
         get_paper_updates=get_paper_updates_xml,
@@ -29,7 +29,7 @@ def _run_updaload() -> None:
         get_blob_names_from_storage=get_blob_names_from_storage,
         upload_release_to_storage=upload_release_to_storage,
         get_datetime_from_release_date=get_datetime_from_release_date,
-    )(rss(), updates_releases_bucket())
+    )(rss, bucket)
 
 
 def _setup_logging() -> None:
