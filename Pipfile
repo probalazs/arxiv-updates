@@ -30,9 +30,9 @@ python_full_version = "3.11.4"
 
 [scripts]
 test = "python -m pytest -p no:cacheprovider"
-format = "black ."
-lint = "flake8 ."
-typecheck = "mypy ."
+format = "python -m black ."
+lint = "python -m flake8 ."
+typecheck = "python -m mypy ."
 run = "python -m src.main"
 terraform-init = "docker-compose run --rm terraform init"
 terraform-apply = "docker-compose run --rm terraform apply"
