@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from src.interface import XML, Release, ReleaseContent, ReleasePaper
+from src.interface import Release, ReleaseContent, ReleasePaper
 from tests.helpers import get_random_string
 
 

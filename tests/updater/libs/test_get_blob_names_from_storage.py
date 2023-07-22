@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from unittest.mock import Mock
 from tests.factories import get_blob
 from tests.helpers import get_random_string
