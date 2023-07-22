@@ -16,13 +16,6 @@ steps:
         pipenv run lint
         pipenv run typecheck
         pipenv requirements
-  - name: "python:3.11"
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        pipenv run lint
-        pipenv run typecheck
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
