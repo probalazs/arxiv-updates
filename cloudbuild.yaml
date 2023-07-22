@@ -10,7 +10,7 @@ steps:
     script: |
       #!/usr/bin/env bash
       pip install pipenv
-      pipenv install --dev --system --deploy
+      pipenv install --dev --deploy
       pipenv run lint
       pipenv run typecheck
       pipenv run test
