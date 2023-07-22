@@ -8,7 +8,7 @@ steps:
         terraform -chdir=infrastructure apply -auto-approve
   - name: "python:3.11"
     env:
-      - PIPENV_VENV_IN_PROJECT=1
+      - export WORKON_HOME=~/.venvs
     script: |
       #!/usr/bin/env bash
       pip install pipenv
