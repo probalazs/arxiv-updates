@@ -2,16 +2,16 @@ from os import environ
 
 
 def project_id() -> str:
-    return environ.get("PROJECT_ID")
+    return environ["PROJECT_ID"]
 
 
 def application_service_account() -> str:
-    return environ.get("APPLICATION_SERVICE_ACCOUNT")
+    return environ["APPLICATION_SERVICE_ACCOUNT"]
 
 
 def rss() -> str:
-    return environ.get("RSS")
+    return environ["RSS"]
 
 
 def updates_releases_bucket() -> str:
-    return environ.get("UPDATES_RELEASE_BUCKET")
+    return environ["UPDATES_RELEASE_BUCKET"]

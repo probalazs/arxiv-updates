@@ -79,3 +79,7 @@ resource "google_storage_bucket_iam_binding" "static_site_object_viewer" {
     "allUsers"
   ]
 }
+
+resource "google_service_account" "test" {
+  account_id = "arxiv-updates-test"
+}

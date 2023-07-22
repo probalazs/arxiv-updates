@@ -1,5 +1,6 @@
 import base64
 import json
+from typing import Any
 
 from src.interface import XML, Release, ReleaseContent, ReleaseFeed, ReleasePaper
 
@@ -37,7 +38,7 @@ def _get_papers(xml: XML) -> list[ReleasePaper]:
     return [_get_paper(entity) for entity in xml.entries]
 
 
-def _get_paper(entity: dict) -> ReleasePaper:
+def _get_paper(entity: Any) -> ReleasePaper:
     return {
         "title": entity.title,
         "summary": entity.summary,

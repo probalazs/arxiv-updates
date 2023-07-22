@@ -1,3 +1,4 @@
+from typing import Any
 from src.updater.upload_new_release import UploadNewRelease
 from src.libs.clients import storage_client
 from src.updater.libs.get_blob_names_from_storage import get_blob_names_from_storage
@@ -14,7 +15,7 @@ import google.cloud.logging
 
 
 @functions_framework.http
-def main(_) -> None:
+def main(_: Any) -> None:
     _setup_logging()
     _run_updaload()
 

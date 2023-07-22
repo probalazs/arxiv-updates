@@ -21,6 +21,8 @@ pytest-timeout = "*"
 pytest-httpserver = "*"
 functions-framework = "*"
 gcp-storage-emulator = "*"
+types-requests = "*"
+pytest-dotenv = "*"
 
 [requires]
 python_version = "3.11"
