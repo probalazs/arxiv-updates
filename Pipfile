@@ -10,6 +10,7 @@ google-cloud-storage = "*"
 google-cloud-pubsub = "*"
 google-auth = "*"
 ramda = "*"
+google-cloud-logging = "*"
 
 [dev-packages]
 black = "*"

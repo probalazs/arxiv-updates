@@ -10,10 +10,12 @@ from src.updater.libs.upload_release_to_storage import upload_release_to_storage
 from src.updater.libs.get_release import get_release
 from src.configuration import rss, updates_releases_bucket
 import functions_framework
+import google.cloud.logging
 
 
 @functions_framework.http
 def main(_) -> None:
+    _setup_logging()
     _run_updaload()
 
 
@@ -27,3 +29,8 @@ def _run_updaload() -> None:
         upload_release_to_storage=upload_release_to_storage,
         get_datetime_from_release_date=get_datetime_from_release_date,
     )(rss(), updates_releases_bucket())
+
+
+def _setup_logging() -> None:
+    client = google.cloud.logging.Client()
+    client.setup_logging()
