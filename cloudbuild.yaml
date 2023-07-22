@@ -13,6 +13,8 @@ steps:
       - |
         pip install pipenv
         pipenv sync
+        pipenv run lint
+        pipenv run typecheck
         pipenv requirements
   - name: "python:3.11"
     entrypoint: bash
