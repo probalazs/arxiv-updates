@@ -7,15 +7,13 @@ steps:
         terraform -chdir=infrastructure init
         terraform -chdir=infrastructure apply -auto-approve
   - name: "python:3.11"
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        pip install pipenv
-        pipenv sync
-        pipenv run lint
-        pipenv run typecheck
-        pipenv requirements > requirements.txt
+    script: |
+      #!/usr/bin/env bash
+      pip install pipenv
+      pipenv sync
+      pipenv run lint
+      pipenv run typecheck
+      pipenv requirements > requirements.txt
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
