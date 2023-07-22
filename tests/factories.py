@@ -1,34 +1,14 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from src.interface import Release, ReleaseContent, ReleasePaper
+from src.interface import XML, Release, ReleaseContent, ReleasePaper, XMLEntry, XMLFeed
 from tests.helpers import get_random_string
 
 
-@dataclass
-class TestXMLFeed:
-    updated: str
-
-
-@dataclass
-class TestXMLEntry:
-    title: str
-    summary: str
-    link: str
-
-
-@dataclass
-class TestXML:
-    feed: TestXMLFeed
-    entries: list[TestXMLEntry]
-
-
-def get_xml(override=None) -> TestXML:
+def get_xml(override=None) -> XML:
     feed = (override or {}).get("feed", {"updated": datetime.now().isoformat()})
     entries = (override or {}).get("entries", [])
-    return TestXML(
-        feed=TestXMLFeed(**feed), entries=[TestXMLEntry(**entry) for entry in entries]
-    )
+    return XML(feed=XMLFeed(**feed), entries=[XMLEntry(**entry) for entry in entries])
 
 
 @dataclass

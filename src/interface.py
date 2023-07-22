@@ -1,6 +1,23 @@
-from typing import Any, TypedDict
+from dataclasses import dataclass
+from typing import TypedDict
 
-XML = Any
+
+@dataclass
+class XMLFeed:
+    updated: str
+
+
+@dataclass
+class XMLEntry:
+    title: str
+    summary: str
+    link: str
+
+
+@dataclass
+class XML:
+    feed: XMLFeed
+    entries: list[XMLEntry]
 
 
 class ReleaseFeed(TypedDict):
