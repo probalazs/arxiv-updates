@@ -7,11 +7,13 @@ _CLOUD_PLATFORM_TARGET_SCOPES = "https://www.googleapis.com/auth/cloud-platform"
 
 
 @lru_cache()
-def _get_credentials(service_account: str) -> credentials.Credentials:
+def _get_credentials() -> credentials.Credentials:
     credentials, _ = default()
+    if not application_service_account():
+        return credentials
     return impersonated_credentials.Credentials(
         source_credentials=credentials,
-        target_principal=service_account,
+        target_principal=application_service_account(),
         target_scopes=_CLOUD_PLATFORM_TARGET_SCOPES,
     )
 
@@ -20,5 +22,5 @@ def _get_credentials(service_account: str) -> credentials.Credentials:
 def storage_client() -> storage.Client:
     return storage.Client(
         project=project_id(),
-        credentials=_get_credentials(application_service_account()),
+        credentials=_get_credentials(),
     )

@@ -5,8 +5,8 @@ def project_id() -> str:
     return environ["PROJECT_ID"]
 
 
-def application_service_account() -> str:
-    return environ["APPLICATION_SERVICE_ACCOUNT"]
+def application_service_account() -> str | None:
+    return environ.get("APPLICATION_SERVICE_ACCOUNT")
 
 
 def rss() -> str:
