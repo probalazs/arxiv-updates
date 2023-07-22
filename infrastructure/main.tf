@@ -31,31 +31,25 @@ resource "google_storage_bucket" "releases" {
   uniform_bucket_level_access = true
 }
 
-resource "google_storage_bucket_iam_binding" "releases_object_viewer" {
+resource "google_storage_bucket_iam_member" "releases_object_viewer" {
   depends_on = [google_storage_bucket.releases]
   bucket     = google_storage_bucket.releases.name
   role       = "roles/storage.objectViewer"
-  members = [
-    "user:allUsers"
-  ]
+  member     = "allUsers"
 }
 
-resource "google_storage_bucket_iam_binding" "object_creator" {
+resource "google_storage_bucket_iam_member" "object_creator" {
   depends_on = [google_service_account.application, google_storage_bucket.releases]
   bucket     = google_storage_bucket.releases.name
   role       = "roles/storage.objectCreator"
-  members = [
-    google_service_account.application.member
-  ]
+  member     = google_service_account.application.member
 }
 
-resource "google_storage_bucket_iam_binding" "object_viewer" {
+resource "google_storage_bucket_iam_member" "object_viewer" {
   depends_on = [google_service_account.application, google_storage_bucket.releases]
   bucket     = google_storage_bucket.releases.name
   role       = "roles/storage.objectViewer"
-  members = [
-    google_service_account.application.member
-  ]
+  member     = google_service_account.application.member
 }
 
 resource "google_storage_bucket" "static-site" {
@@ -71,13 +65,11 @@ resource "google_storage_bucket" "static-site" {
   }
 }
 
-resource "google_storage_bucket_iam_binding" "static_site_object_viewer" {
+resource "google_storage_bucket_iam_member" "static_site_object_viewer" {
   depends_on = [google_storage_bucket.static-site]
   bucket     = google_storage_bucket.static-site.name
   role       = "roles/storage.objectViewer"
-  members = [
-    "user:allUsers"
-  ]
+  member     = "allUsers"
 }
 
 resource "google_service_account" "test" {
@@ -100,6 +92,6 @@ resource "google_cloud_scheduler_job" "check_for_updates" {
   http_target {
     http_method = "POST"
     uri         = data.google_cloudfunctions_function.arxiv_updates.https_trigger_url
-    body        = "{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}"
+    body        = base64encode("{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}")
   }
 }
