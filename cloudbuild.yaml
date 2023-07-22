@@ -4,8 +4,8 @@ steps:
     args:
       - "-c"
       - |
-        terraform init -chdir=infrastructure
-        terraform apply -chdir=infrastructure -auto-approve
+        terraform -chdir=infrastructure init
+        terraform -chdir=infrastructure apply -auto-approve
   - name: "ubuntu"
     entrypoint: sh
     args:
