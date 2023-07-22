@@ -24,5 +24,6 @@ steps:
       - arxiv-updates
       - --region=europe-west3
       - --source=.
+      - --entry-point=main
       - --runtime=python311
       - --allow-unauthenticated
