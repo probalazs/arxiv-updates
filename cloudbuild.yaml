@@ -13,6 +13,7 @@ steps:
       pipenv install
       pipenv run lint
       pipenv run typecheck
+      pipenv run test
       pipenv requirements > requirements.txt
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
