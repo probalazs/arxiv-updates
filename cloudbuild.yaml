@@ -15,7 +15,7 @@ steps:
         pipenv sync
         pipenv run lint
         pipenv run typecheck
-        pipenv requirements
+        pipenv requirements > requirements.txt
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
