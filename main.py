@@ -18,6 +18,7 @@ def main(request: Any) -> None:
     body = request.get_json(silent=True)
     _setup_logging()
     _run_updaload(body["rss"], body["bucket"])
+    return "", 200
 
 
 def _run_updaload(rss: str, bucket: str) -> None:
