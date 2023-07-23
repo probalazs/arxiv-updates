@@ -1,3 +1,7 @@
+locals {
+  project_id = "clean-fin-392913"
+}
+
 terraform {
   backend "gcs" {
     bucket = "arxiv_updates_tfstate"
@@ -15,7 +19,7 @@ terraform {
 
 provider "google" {
   impersonate_service_account = "terraform@clean-fin-392913.iam.gserviceaccount.com"
-  project                     = "clean-fin-392913"
+  project                     = local.project_id
   region                      = "europe-west3"
 }
 
@@ -80,6 +84,21 @@ resource "google_service_account" "scheduler" {
   account_id = "arxiv-updates-scheduler"
 }
 
+resource "google_project_iam_member" "scheduler_scheduler_service_agent" {
+  depends_on = [google_service_account.scheduler]
+  project    = local.project_id
+  role       = "roles/cloudscheduler.serviceAgent"
+  member     = google_service_account.scheduler.member
+}
+
+resource "google_project_iam_member" "scheduler_cloud_funcions_invoker" {
+  depends_on = [google_service_account.scheduler]
+  project    = local.project_id
+  role       = "roles/cloudfunctions.invoker"
+  member     = google_service_account.scheduler.member
+}
+
+
 data "google_cloudfunctions_function" "arxiv_updates" {
   name = "arxiv-updates"
 }
@@ -98,6 +117,9 @@ resource "google_cloud_scheduler_job" "check_for_updates" {
     http_method = "POST"
     uri         = data.google_cloudfunctions_function.arxiv_updates.https_trigger_url
     body        = base64encode("{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}")
+    headers = {
+      "Content-Type" = "application/json"
+    }
     oidc_token {
       service_account_email = google_service_account.scheduler.email
     }
