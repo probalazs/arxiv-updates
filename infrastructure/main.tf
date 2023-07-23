@@ -85,9 +85,10 @@ data "google_cloudfunctions_function" "arxiv_updates" {
 }
 
 resource "google_cloud_scheduler_job" "check_for_updates" {
-  name      = "check-for-updates"
-  schedule  = "30 4 * * *"
-  time_zone = "Europe/Budapest"
+  depends_on = [data.google_cloudfunctions_function.arxiv_updates, google_service_account.scheduler, google_storage_bucket.releases]
+  name       = "check-for-updates"
+  schedule   = "30 4 * * *"
+  time_zone  = "Europe/Budapest"
 
   retry_config {
     retry_count = 1
@@ -97,7 +98,7 @@ resource "google_cloud_scheduler_job" "check_for_updates" {
     http_method = "POST"
     uri         = data.google_cloudfunctions_function.arxiv_updates.https_trigger_url
     body        = base64encode("{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}")
-    oauth_token {
+    oidc_token {
       service_account_email = google_service_account.scheduler.email
     }
   }
