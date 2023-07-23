@@ -76,6 +76,10 @@ resource "google_service_account" "test" {
   account_id = "arxiv-updates-test"
 }
 
+resource "google_service_account" "scheduler" {
+  account_id = "arxiv-updates-scheduler"
+}
+
 data "google_cloudfunctions_function" "arxiv_updates" {
   name = "arxiv-updates"
 }
@@ -93,5 +97,8 @@ resource "google_cloud_scheduler_job" "check_for_updates" {
     http_method = "POST"
     uri         = data.google_cloudfunctions_function.arxiv_updates.https_trigger_url
     body        = base64encode("{\"bucket\":\"${google_storage_bucket.releases.name}\",\"rss\":\"http://export.arxiv.org/rss/cs.AI\"}")
+    oauth_token {
+      service_account_email = google_service_account.scheduler.email
+    }
   }
 }
