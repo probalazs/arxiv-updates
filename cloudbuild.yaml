@@ -25,4 +25,6 @@ steps:
       - --source=.
       - --entry-point=main
       - --runtime=python311
-      - --run-service-account=arxiv-updates-application@clean-fin-392913.iam.gserviceaccount.com
+      - --service-account=arxiv-updates-application@clean-fin-392913.iam.gserviceaccount.com
+      - --security-level=secure-always
+      - --trigger-http
