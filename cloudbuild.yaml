@@ -28,3 +28,4 @@ steps:
       - --service-account=arxiv-updates-application@clean-fin-392913.iam.gserviceaccount.com
       - --security-level=secure-always
       - --trigger-http
+      - --no-allow-unauthenticated
