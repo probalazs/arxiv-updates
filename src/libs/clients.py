@@ -1,6 +1,6 @@
 from functools import lru_cache
 from google.cloud import storage
-from src.configuration import application_service_account, project_id
+from src.configuration import application_service_account
 from google.auth import impersonated_credentials, default, credentials
 
 _CLOUD_PLATFORM_TARGET_SCOPES = "https://www.googleapis.com/auth/cloud-platform"
@@ -21,6 +21,5 @@ def _get_credentials() -> credentials.Credentials:
 @lru_cache()
 def storage_client() -> storage.Client:
     return storage.Client(
-        project=project_id(),
         credentials=_get_credentials(),
     )
