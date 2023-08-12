@@ -33,6 +33,11 @@ resource "google_storage_bucket" "releases" {
   force_destroy = true
 
   uniform_bucket_level_access = true
+
+  cors {
+    origin = ["*"]
+    method = ["GET"]
+  }
 }
 
 resource "google_storage_bucket_iam_member" "releases_object_viewer" {
