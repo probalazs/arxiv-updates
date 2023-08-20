@@ -61,26 +61,6 @@ resource "google_storage_bucket_iam_member" "object_viewer" {
   member     = google_service_account.application.member
 }
 
-resource "google_storage_bucket" "static-site" {
-  name          = "arxiv-updates-static-site"
-  location      = "europe-west3"
-  force_destroy = true
-
-  uniform_bucket_level_access = true
-
-  website {
-    main_page_suffix = "index.html"
-    not_found_page   = "404.html"
-  }
-}
-
-resource "google_storage_bucket_iam_member" "static_site_object_viewer" {
-  depends_on = [google_storage_bucket.static-site]
-  bucket     = google_storage_bucket.static-site.name
-  role       = "roles/storage.objectViewer"
-  member     = "allUsers"
-}
-
 resource "google_service_account" "test" {
   account_id = "arxiv-updates-test"
 }
